@@ -13,6 +13,7 @@ export class AuthController {
   @ApiOperation({ summary: 'Register a new user' })
   @ApiResponse({ status: 201, description: 'User successfully registered', type: User })
   async register(@Body() dto: RegisterDto): Promise<{ accessToken: string; user: User }> {
+    console.log(dto);
     const user = await this.authService.register(dto);
     const { accessToken } = await this.authService.login({ email: dto.email, password: dto.password });
     return { accessToken, user };
@@ -32,6 +33,7 @@ export class AuthController {
   @ApiOperation({ summary: 'Verify SIWE signature and login' })
   @ApiResponse({ status: 200, description: 'SIWE verification successful', type: User })
   async verifyWallet(@Body() dto: SIWEVerifyDto): Promise<{ accessToken: string; user: User }> {
+    console.log(dto);
     return this.authService.verifyWallet(dto);
   }
 }

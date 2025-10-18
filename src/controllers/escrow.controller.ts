@@ -14,6 +14,7 @@ export class EscrowController {
   @Post()
   @ApiOperation({ summary: 'Create an escrow' })
   async create(@Request() req: any, @Body() dto: EscrowCreateDto) {
+    console.log(dto);
     return this.escrowService.createEscrow(req.user.id, dto);
   }
 
